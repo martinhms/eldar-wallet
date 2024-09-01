@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities
+package com.org.marton.studio.project.eldarwallet.ui.activities.main
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
