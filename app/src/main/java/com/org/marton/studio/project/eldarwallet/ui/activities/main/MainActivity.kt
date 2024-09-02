@@ -53,10 +53,8 @@ class MainActivity : AppCompatActivity() {
         }
         viewModel.userData.observe(this) { userData ->
             // Actualizar la UI con los datos del usuario
-            usernameTextView.text = getGreattings(userData.userNamer)
-
-
-            balanceTextView.text = String.format("$ %.2f", userData.baalnce)
+            usernameTextView.text = getGreattings(userData.userName + " " + userData.userLastname)
+            balanceTextView.text = String.format("$ %.2f", userData.balance)
 
             val recyclerView: RecyclerView = findViewById(R.id.tarjetasRecyclerView)
             val adapter = DigitalCardAdapter(userData.cards)
