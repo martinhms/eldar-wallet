@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.hiltAndroidPlugin)
+    id("org.jetbrains.kotlin.kapt")
 }
 
 android {
@@ -41,6 +42,13 @@ dependencies {
 //Dagger-Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+//Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
