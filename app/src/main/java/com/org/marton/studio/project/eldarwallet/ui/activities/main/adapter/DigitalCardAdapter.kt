@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.org.marton.studio.project.eldarwallet.R
-import com.org.marton.studio.project.eldarwallet.ui.activities.domain.DigitalCard
+import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 
 class DigitalCardAdapter(private val digitalCards: List<DigitalCard>) :
     RecyclerView.Adapter<DigitalCardAdapter.ViewHolder>() {class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

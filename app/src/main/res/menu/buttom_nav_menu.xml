@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/qr_paid_tab"
+        android:icon="@drawable/qr_code_icon"
+        android:title="@string/qr_paid" />
+    <item
+        android:id="@+id/main_activity_tab"
+        android:icon="@drawable/icon_eldar_tab"
+        android:title="@string/balance_tab" />
+    <item
+        android:id="@+id/contacless_paid_tab"
+        android:icon="@drawable/paid_contacless_icon"
+        android:title="@string/paid_contactless" />
+</menu>
