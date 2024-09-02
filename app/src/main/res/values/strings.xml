@@ -4,4 +4,10 @@
     <string name="password">Password</string>
     <string name="appname">EldarWallet</string>
     <string name="signin">Sign In\n</string>
+    <string name="digital_cards_list_title">Your cards:</string>
+    <string name="add_card_desc_button">Add card</string>
+    <string name="qr_paid">Qr paid</string>
+    <string name="paid_contactless">Paid contactless</string>
+    <string name="balance">Balance:</string>
+    <string name="balance_tab">Balance</string>
 </resources>
