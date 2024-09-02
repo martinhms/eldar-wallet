@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(
     val userData: LiveData<UserData> = _userData
 
     init {
-        getUserData("1")
+        getUserData("1234")
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -38,6 +38,7 @@ class MainViewModel @Inject constructor(
                         id = userData.id,
                         userName = userData.userName,
                         userLastname = userData.userLastname,
+                        password = userData.password,
                         cards = digitalCards,
                         balance = balance,
                         identification = userData.identification,
@@ -59,75 +60,11 @@ private fun getBalance() = 1500.0
 fun initCardList() = listOf(
     DigitalCard(
         1234567890,
-        1,
-        "Banco Galicia",
+        1234,
+        "Santander",
         "Visa",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        1234567820,
-        1,
-        "Banco Ciudad",
-        "Master Card",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        1234563890,
-        1,
-        "Banco Macro",
-        "Visa",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        1234563890,
-        1,
-        "Banco Macro",
-        "Visa",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        1234563890,
-        1,
-        "Banco Macro",
-        "Visa",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        1234563890,
-        1,
-        "Banco Macro",
-        "Visa",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        1234563890,
-        1,
-        "Banco Macro",
-        "Visa",
-        "Crédito",
-        123,
-        202412
-    ),
-    DigitalCard(
-        987654321,
-        1,
-        "Banco Santander",
-        "Mastercard",
         "Débito",
-        456,
-        202506
+        123,
+        1233,
     )
-
 )

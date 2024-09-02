@@ -1,0 +1,51 @@
+package com.org.marton.studio.project.eldarwallet.ui.activities.addcard
+
+import android.os.Build
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class AddDigitalCardActivity : AppCompatActivity() {
+
+    private val viewModel: AddDigitalCardViewModel by viewModels()
+
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_add_digital_card)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+
+        val editTextNumber = findViewById<EditText>(R.id.editTextNumber)
+        val editTextBankName = findViewById<EditText>(R.id.editTextBankName)
+        val editTextSecurityCode = findViewById<EditText>(R.id.editTextSecurityCode)
+        val editTextExpirationDate = findViewById<EditText>(R.id.editTextExpirationDate)
+        val buttonCreateCard = findViewById<Button>(R.id.buttonCreateCard)
+
+        buttonCreateCard.setOnClickListener {
+            val number = editTextNumber.text.toString().toLongOrNull() ?: 0
+            val bankName = editTextBankName.text.toString()
+            val securityCode = editTextSecurityCode.text.toString().toIntOrNull() ?: 0
+            val expirationDate = editTextExpirationDate.text.toString().toLongOrNull() ?: 0
+
+            viewModel.addDigitalCard(number, bankName, securityCode, expirationDate)
+            Toast.makeText(this, "Tarjeta creada", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
+}

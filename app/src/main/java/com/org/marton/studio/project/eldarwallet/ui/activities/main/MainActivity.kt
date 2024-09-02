@@ -1,5 +1,6 @@
 package com.org.marton.studio.project.eldarwallet.ui.activities.main
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.widget.TextView
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.activities.addcard.AddDigitalCardActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -55,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         viewModel.userData.observe(this) { userData ->
-            // Actualizar la UI con los datos del usuario
             usernameTextView.text = getGreattings(userData.userName + " " + userData.userLastname)
             balanceTextView.text = String.format("$ %.2f", userData.balance)
 
@@ -64,8 +65,10 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
         }
+
         addCardButton.setOnClickListener {
-            //TODO
+            intent = Intent(this, AddDigitalCardActivity::class.java)
+            startActivity(intent)
         }
     }
 

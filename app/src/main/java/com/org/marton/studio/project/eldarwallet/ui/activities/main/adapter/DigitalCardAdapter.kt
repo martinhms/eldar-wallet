@@ -25,7 +25,7 @@ class DigitalCardAdapter(private val digitalCards: List<DigitalCard>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val digitalCard = digitalCards[position]
         holder.cardBankNameTextView.text = digitalCard.bankname
-        holder.cardNumberTextView.text = formatCardNumber(digitalCard.numero)
+        holder.cardNumberTextView.text = formatCardNumber(digitalCard.number)
         holder.cardManagmentNameTextView.text = digitalCard.managmentName
         holder.cardTypeTextView.text = digitalCard.type
     }
@@ -34,7 +34,7 @@ class DigitalCardAdapter(private val digitalCards: List<DigitalCard>) :
         return digitalCards.size
     }
 
-    private fun formatCardNumber(number: Int): String {
+    private fun formatCardNumber(number: Long): String {
         return "**** **** **** ${number % 10000}"
     }
 }
