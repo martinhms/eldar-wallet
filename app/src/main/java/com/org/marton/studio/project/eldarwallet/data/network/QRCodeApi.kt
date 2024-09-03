@@ -7,5 +7,5 @@ import retrofit2.http.Query
 
 interface QRCodeApi {
     @POST("classic")
-    fun generateQrCode(@Query("text") data: String): Call<ResponseBody>
+   suspend fun generateQrCode(@Query("text") data: String): Call<ResponseBody>
 }

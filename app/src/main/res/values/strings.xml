@@ -18,5 +18,7 @@
     <string name="btn_pay">Generate QR pay</string>
 
     <string name="rapi_api_key">9a4f5a900dmsh074679de11bc8d9p1f1dcejsn2bc518e00e15</string>
+    <string name="choose_the_card">Choose the card</string>
+    <string name="selected_card">Selected Card</string>
 
-    </resources>
+</resources>

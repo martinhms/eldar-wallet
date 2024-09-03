@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.marton.studio.project.eldarwallet.R
 import com.org.marton.studio.project.eldarwallet.ui.activities.addcard.AddDigitalCardActivity
+import com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.ContactlessPayActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,10 +56,10 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.contacless_paid_tab -> {
+                    intent = Intent(this, ContactlessPayActivity::class.java)
+                    startActivity(intent)
                     true
                 }
-
-
                 else -> false
             }
         }
