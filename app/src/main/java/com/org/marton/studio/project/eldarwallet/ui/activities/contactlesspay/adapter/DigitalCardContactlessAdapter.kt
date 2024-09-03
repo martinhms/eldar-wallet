@@ -18,7 +18,7 @@ class DigitalCardContactlessAdapter(
     RecyclerView.Adapter<DigitalCardContactlessAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardBankNameTextView: TextView = itemView.findViewById(R.id.cardBankNameTextView)
-        val cardNumberTextView: TextView = itemView.findViewById(R.id.cardNumberTextView)
+        val cardNumberTextView: TextView = itemView.findViewById(R.id.cardNumberSelectedTextView)
         val cardManagmentNameTextView: TextView =
             itemView.findViewById(R.id.cardManagmentNameTextView)
         val cardTypeTextView: TextView = itemView.findViewById(R.id.cardTypeTextView)
@@ -35,12 +35,12 @@ class DigitalCardContactlessAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val digitalCard = digitalCards[position]
         if (position == selectedItemPosition) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selected_card_color)) // Cambia el color de fondo
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selected_card_color))
         } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color)) // Restaura el color de fondo
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color))
         }
         holder.cardBankNameTextView.text = CardUtils.getBankNameByCode(digitalCard.bank.toInt())
-        holder.cardNumberTextView.text = formatCardNumber(digitalCard.number)
+        holder.cardNumberTextView.text = CardUtils.formatCardNumber(digitalCard.number)
         holder.cardManagmentNameTextView.text = CardUtils.getBrandCardNameByCode(digitalCard.brand)
         holder.cardTypeTextView.text = CardUtils.getTypeCardDescByCode(digitalCard.type)
         holder.itemView.setOnClickListener {
@@ -52,9 +52,5 @@ class DigitalCardContactlessAdapter(
 
     override fun getItemCount(): Int {
         return digitalCards.size
-    }
-
-    private fun formatCardNumber(number: Long): String {
-        return "**** **** **** ${number % 10000}"
     }
 }

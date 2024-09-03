@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDataUseCase
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDigitalCardsUseCase
+import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,9 @@ class ContactlessPayViewModel @Inject constructor(
 
     private val _userData = MutableLiveData<UserData>()
     val userData: LiveData<UserData> = _userData
+
+    private val _selectedCard = MutableLiveData<DigitalCard>()
+    val selectedCard: LiveData<DigitalCard> = _selectedCard
 
     init {
         getUserData("1234")
@@ -53,6 +57,11 @@ class ContactlessPayViewModel @Inject constructor(
             }
         }
     }
+
+    fun setSelectedCard(card: DigitalCard) {
+        _selectedCard.value = card
+    }
+
 
     private fun getBalance() = 1500.0
 }

@@ -44,7 +44,7 @@
                 android:padding="15dp">
 
                 <TextView
-                    android:id="@+id/cardBrandView"
+                    android:id="@+id/cardBrandSelectedView"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
@@ -55,7 +55,7 @@
                     android:textColorHint="@color/white" />
 
                 <TextView
-                    android:id="@+id/cardTypeImageView"
+                    android:id="@+id/cardTypeSelectedImageView"
                     android:layout_width="match_parent"
                     android:layout_height="32dp"
                     android:layout_marginTop="15dp"
@@ -66,7 +66,7 @@
                     android:textColorHint="@color/white" />
 
                 <TextView
-                    android:id="@+id/cardNumberTextView"
+                    android:id="@+id/cardNumberSelectedTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"

@@ -40,7 +40,7 @@ class AddDigitalCardActivity : AppCompatActivity() {
             insets
         }
 
-        val cardNumberTextView = findViewById<TextView>(R.id.cardNumberTextView)
+        val cardNumberTextView = findViewById<TextView>(R.id.cardNumberSelectedTextView)
         val cardClientNameTextView = findViewById<TextView>(R.id.cardClientNameTextView)
         val cardExpiryDateTextView = findViewById<TextView>(R.id.cardExpiryDateTextView)
         val cardTypeImageView = findViewById<TextView>(R.id.cardTypeImageView)

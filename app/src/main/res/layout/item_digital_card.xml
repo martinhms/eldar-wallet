@@ -38,7 +38,7 @@
             android:textColor="#666666"
             android:textSize="14sp" />
         <TextView
-            android:id="@+id/cardNumberTextView"
+            android:id="@+id/cardNumberSelectedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="**** **** **** 1234"

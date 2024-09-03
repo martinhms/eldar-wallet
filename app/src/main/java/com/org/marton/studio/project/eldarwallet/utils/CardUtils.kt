@@ -48,4 +48,8 @@ object CardUtils {
             else -> null
         }
     }
+
+    fun formatCardNumber(number: Long): String {
+        return "**** **** **** ${number % 10000}"
+    }
 }

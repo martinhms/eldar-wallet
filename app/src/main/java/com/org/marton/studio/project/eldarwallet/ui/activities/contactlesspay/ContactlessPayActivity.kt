@@ -3,6 +3,7 @@ package com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -18,14 +19,13 @@ import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
+import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
 
     private val viewModel: ContactlessPayViewModel by viewModels()
-    private var selectedDigitalCard: DigitalCard? = null
-
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,10 @@ class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        val cardBrandTextView: TextView = findViewById(R.id.cardBrandSelectedView)
+        val cardTypeTextView: TextView = findViewById(R.id.cardTypeSelectedImageView)
+        val cardNumberTextView: TextView = findViewById(R.id.cardNumberSelectedTextView)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
 
@@ -64,13 +68,21 @@ class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
 
         viewModel.userData.observe(this) { userData ->
             val recyclerView: RecyclerView = findViewById(R.id.cardContaclesRV)
-            val adapter = DigitalCardContactlessAdapter(userData.cards ?: emptyList(),this)
-            recyclerView.adapter= adapter
+            val adapter = DigitalCardContactlessAdapter(userData.cards ?: emptyList(), this)
+            recyclerView.adapter = adapter
             val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            recyclerView.layoutManager = layoutManager         }
+            recyclerView.layoutManager = layoutManager
+        }
+
+        viewModel.selectedCard.observe(this) { selectedCard ->
+            cardBrandTextView.text = CardUtils.getBrandCardNameByCode(selectedCard.brand)
+            cardTypeTextView.text = CardUtils.getTypeCardDescByCode(selectedCard.type)
+            cardNumberTextView.text = CardUtils.formatCardNumber(selectedCard.number)
+        }
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCardClick(selectedItem: DigitalCard) {
-        selectedDigitalCard = selectedItem
+        viewModel.setSelectedCard(selectedItem)
     }
 }
