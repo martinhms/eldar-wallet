@@ -39,16 +39,18 @@ android {
 }
 
 dependencies {
-//Dagger-Hilt
+    //Dagger-Hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-//Room
+    //Room
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
-
+    //LiveData-ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-
+    // Retrofit - Gson
+    implementation(libs.retrofit)
+    implementation(libs.gson.converter)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
