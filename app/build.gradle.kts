@@ -49,6 +49,8 @@ dependencies {
     //LiveData-ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     // Retrofit - Gson
+    //Picasso
+    implementation(libs.picasso)
     implementation(libs.retrofit)
     implementation(libs.gson.converter)
     implementation(libs.logging.interceptor)
