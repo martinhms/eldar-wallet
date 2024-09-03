@@ -23,6 +23,13 @@ class LoginActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (viewModel.isUserLoggedIn()) {
+            Intent(this, MainActivity::class.java)
+                .also {
+                    startActivity(it)
+                    finish()
+                }
+        }
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -50,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
                 createdTime = System.currentTimeMillis()
             )
             viewModel.createUser(userData)
+            viewModel.saveUserId(userData.id)
             Toast.makeText(this, "Usuario creado", Toast.LENGTH_SHORT).show()
         }
     }
