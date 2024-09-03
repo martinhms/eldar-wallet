@@ -53,5 +53,20 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+<!--
+        TODO: ELIMINAR BOTON
+-->
+        <Button
+            android:id="@+id/createUserButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#B7B0B0"
+            android:fontFamily="sans-serif-black"
+            android:text="create user"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

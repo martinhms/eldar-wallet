@@ -3,6 +3,7 @@ package com.org.marton.studio.project.eldarwallet.di
 import android.content.Context
 import androidx.room.Room
 import com.org.marton.studio.project.eldarwallet.data.db.DataBase
+import com.org.marton.studio.project.eldarwallet.data.db.DigitalCardDao
 import com.org.marton.studio.project.eldarwallet.data.db.UserDao
 import dagger.Module
 import dagger.Provides
@@ -18,6 +19,10 @@ class DataBaseModule {
     @Provides
     fun provideUserDao(dataBase: DataBase): UserDao {
         return dataBase.userDao()
+    }
+    @Provides
+    fun provideDigitalCardDao(dataBase: DataBase): DigitalCardDao {
+        return dataBase.digitalCardDao()
     }
 
     @Provides

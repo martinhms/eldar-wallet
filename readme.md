@@ -38,8 +38,9 @@ Se utilizará la siguiente API para generar códigos QR:
 ## Tecnologías
 
 * Se utilizará el lenguaje de programación Kotlin.
-* Se utilizará la librería Jetpack Compose para el desarrollo de la interfaz de usuario.
+* Se utilizará la librería de View y ViewGroup para el desarrollo de la interfaz de usuario.
 * Se utilizará Room para la persistencia de datos.
+* DI con Dagger-Hilt
 * Se utilizará una librería de encriptación para el almacenamiento seguro de la información de las tarjetas.
 * Se utilizará Retrofit para la integración con la API de generación de códigos QR.
 

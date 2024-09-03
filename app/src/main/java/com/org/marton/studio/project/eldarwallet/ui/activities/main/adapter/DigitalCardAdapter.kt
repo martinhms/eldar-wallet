@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.org.marton.studio.project.eldarwallet.R
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
+import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 
 class DigitalCardAdapter(private val digitalCards: List<DigitalCard>) :
     RecyclerView.Adapter<DigitalCardAdapter.ViewHolder>() {class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,17 +25,17 @@ class DigitalCardAdapter(private val digitalCards: List<DigitalCard>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val digitalCard = digitalCards[position]
-        holder.cardBankNameTextView.text = digitalCard.bankname
-        holder.cardNumberTextView.text = formatCardNumber(digitalCard.numero)
-        holder.cardManagmentNameTextView.text = digitalCard.managmentName
-        holder.cardTypeTextView.text = digitalCard.type
+        holder.cardBankNameTextView.text = CardUtils.getBankNameByCode(digitalCard.bank.toInt())
+        holder.cardNumberTextView.text = formatCardNumber(digitalCard.number)
+        holder.cardManagmentNameTextView.text =CardUtils.getBrandCardNameByCode(digitalCard.brand)
+        holder.cardTypeTextView.text =CardUtils.getTypeCardDescByCode(digitalCard.type)
     }
 
     override fun getItemCount(): Int {
         return digitalCards.size
     }
 
-    private fun formatCardNumber(number: Int): String {
+    private fun formatCardNumber(number: Long): String {
         return "**** **** **** ${number % 10000}"
     }
 }

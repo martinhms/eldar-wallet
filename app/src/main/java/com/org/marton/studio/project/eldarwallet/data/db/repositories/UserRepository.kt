@@ -7,7 +7,6 @@ import com.org.marton.studio.project.eldarwallet.data.db.entities.UserEntity
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.time.OffsetDateTime
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,6 +22,7 @@ constructor(private val userDao: UserDao) {
                     id = entity.id,
                     userName = entity.userName,
                     userLastname = entity.userLastname,
+                    password = entity.password,
                     identification = entity.identification,
                     email = entity.email,
                     avatar = entity.avatar,
@@ -35,6 +35,7 @@ constructor(private val userDao: UserDao) {
                 id = 0,
                 userName = "",
                 userLastname = "",
+                password = "",
                 identification = "",
                 email = "",
                 avatar = "",
@@ -59,6 +60,7 @@ fun UserData.toData(): UserEntity {
         id = this.id,
         userName = this.userName,
         userLastname = this.userLastname,
+        password = this.password,
         identification = this.identification,
         email = this.email,
         avatar = this.avatar ?: "",
