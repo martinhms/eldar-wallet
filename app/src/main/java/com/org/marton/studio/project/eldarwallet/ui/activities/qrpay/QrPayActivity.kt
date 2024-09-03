@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.ContactlessPayActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.DigitalCardQrAdapter
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
@@ -76,8 +77,6 @@ class QrPayActivity : AppCompatActivity(), OnCardClickListener {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.qr_paid_tab -> {
-                    intent = Intent(this, QrPayActivity::class.java)
-                    startActivity(intent)
                     true
                 }
 
@@ -88,6 +87,8 @@ class QrPayActivity : AppCompatActivity(), OnCardClickListener {
                 }
 
                 R.id.contacless_paid_tab -> {
+                    intent = Intent(this, ContactlessPayActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 

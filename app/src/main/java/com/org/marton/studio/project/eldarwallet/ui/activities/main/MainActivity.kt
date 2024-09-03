@@ -50,8 +50,6 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.main_activity_tab -> {
-                    intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
                     true
                 }
 

@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.adapter.DigitalCardContactlessAdapter
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
-import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
@@ -55,8 +55,6 @@ class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
                 }
 
                 R.id.contacless_paid_tab -> {
-                    intent = Intent(this, ContactlessPayActivity::class.java)
-                    startActivity(intent)
                     true
                 }
 

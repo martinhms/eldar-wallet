@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay
+package com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.adapter
 
 import android.view.LayoutInflater
 import android.view.View
