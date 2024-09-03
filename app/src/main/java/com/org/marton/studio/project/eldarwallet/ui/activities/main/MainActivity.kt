@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.marton.studio.project.eldarwallet.R
 import com.org.marton.studio.project.eldarwallet.ui.activities.addcard.AddDigitalCardActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
+import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,6 +43,14 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.qr_paid_tab -> {
+                    intent = Intent(this, QrPayActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.main_activity_tab -> {
+                    intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 
@@ -49,9 +58,6 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.main_activity_tab -> {
-                    true
-                }
 
                 else -> false
             }
@@ -61,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             balanceTextView.text = String.format("$ %.2f", userData.balance)
 
             val recyclerView: RecyclerView = findViewById(R.id.tarjetasRecyclerView)
-            val adapter = DigitalCardAdapter(userData.cards?: emptyList())
+            val adapter = DigitalCardAdapter(userData.cards ?: emptyList())
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
         }
