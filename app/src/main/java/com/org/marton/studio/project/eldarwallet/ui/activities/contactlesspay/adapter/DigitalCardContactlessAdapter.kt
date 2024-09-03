@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter
+package com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +7,15 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 
-class DigitalCardQrAdapter(
+class DigitalCardContactlessAdapter(
     private val digitalCards: List<DigitalCard>,
     private val listener: OnCardClickListener
 ) :
-    RecyclerView.Adapter<DigitalCardQrAdapter.ViewHolder>() {
+    RecyclerView.Adapter<DigitalCardContactlessAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardBankNameTextView: TextView = itemView.findViewById(R.id.cardBankNameTextView)
         val cardNumberTextView: TextView = itemView.findViewById(R.id.cardNumberSelectedTextView)
@@ -27,16 +28,16 @@ class DigitalCardQrAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_digital_card, parent, false)
+            .inflate(R.layout.item_digital_card_contactless, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val digitalCard = digitalCards[position]
         if (position == selectedItemPosition) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selected_card_color)) // Cambia el color de fondo
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selected_card_color))
         } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color)) // Restaura el color de fondo
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color))
         }
         holder.cardBankNameTextView.text = CardUtils.getBankNameByCode(digitalCard.bank.toInt())
         holder.cardNumberTextView.text = CardUtils.formatCardNumber(digitalCard.number)
@@ -52,5 +53,4 @@ class DigitalCardQrAdapter(
     override fun getItemCount(): Int {
         return digitalCards.size
     }
-
 }

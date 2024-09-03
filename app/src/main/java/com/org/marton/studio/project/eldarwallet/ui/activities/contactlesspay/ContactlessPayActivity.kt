@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.main
+package com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay
 
 import android.content.Intent
 import android.os.Build
@@ -13,33 +13,36 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.marton.studio.project.eldarwallet.R
-import com.org.marton.studio.project.eldarwallet.ui.activities.addcard.AddDigitalCardActivity
-import com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.ContactlessPayActivity
-import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
+import com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.adapter.DigitalCardContactlessAdapter
+import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
+import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
+import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
+import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: ContactlessPayViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_contactless_pay)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val addCardButton: FloatingActionButton = findViewById(R.id.agregarTarjetaButton)
+
+        val cardBrandTextView: TextView = findViewById(R.id.cardBrandSelectedView)
+        val cardTypeTextView: TextView = findViewById(R.id.cardTypeSelectedImageView)
+        val cardNumberTextView: TextView = findViewById(R.id.cardNumberSelectedTextView)
+
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-        val balanceTextView: TextView = findViewById(R.id.balanceTextView)
-        val usernameTextView: TextView = findViewById(R.id.usernameEditText)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -50,34 +53,36 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.main_activity_tab -> {
+                    intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 
                 R.id.contacless_paid_tab -> {
-                    intent = Intent(this, ContactlessPayActivity::class.java)
-                    startActivity(intent)
                     true
                 }
+
                 else -> false
             }
         }
-        viewModel.userData.observe(this) { userData ->
-            usernameTextView.text = getGreattings(userData.userName + " " + userData.userLastname)
-            balanceTextView.text = String.format("$ %.2f", userData.balance)
 
-            val recyclerView: RecyclerView = findViewById(R.id.tarjetasRecyclerView)
-            val adapter = DigitalCardAdapter(userData.cards ?: emptyList())
+        viewModel.userData.observe(this) { userData ->
+            val recyclerView: RecyclerView = findViewById(R.id.cardContaclesRV)
+            val adapter = DigitalCardContactlessAdapter(userData.cards ?: emptyList(), this)
             recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
+            val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.layoutManager = layoutManager
         }
 
-        addCardButton.setOnClickListener {
-            intent = Intent(this, AddDigitalCardActivity::class.java)
-            startActivity(intent)
+        viewModel.selectedCard.observe(this) { selectedCard ->
+            cardBrandTextView.text = CardUtils.getBrandCardNameByCode(selectedCard.brand)
+            cardTypeTextView.text = CardUtils.getTypeCardDescByCode(selectedCard.type)
+            cardNumberTextView.text = CardUtils.formatCardNumber(selectedCard.number)
         }
     }
 
-    private fun getGreattings(s: String): String {
-        return "Hi $s!"
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCardClick(selectedItem: DigitalCard) {
+        viewModel.setSelectedCard(selectedItem)
     }
 }

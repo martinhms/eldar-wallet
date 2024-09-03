@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EldarWallet"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.contactlesspay.ContactlessPayActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.qrpay.QrPayActivity"
             android:exported="false" />
         <activity

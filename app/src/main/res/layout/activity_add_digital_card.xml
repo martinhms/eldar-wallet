@@ -36,7 +36,7 @@
                 android:textColorHint="@color/white" />
 
             <TextView
-                android:id="@+id/cardNumberTextView"
+                android:id="@+id/cardNumberSelectedTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
