@@ -21,34 +21,31 @@ class AddDigitalCardViewModel @Inject constructor(
     private val addDigitalCardActivity: AddDigitalCardUseCase
 ) : ViewModel() {
 
-    private val _cardTypeCode = MutableLiveData<Int>()
-    val cardTypeCode: LiveData<Int> = _cardTypeCode
-
-    private val _bankCode = MutableLiveData<Int>()
-    val bankCode: LiveData<Int> = _bankCode
+    private val cardTypeCode = MutableLiveData<Int>()
+    private val bankCode = MutableLiveData<Int>()
 
     @RequiresApi(Build.VERSION_CODES.P)
-    fun addDigitalCard(number: Long, bankName: String, securityCode: Int, expirationDate: Long) {
+    fun addDigitalCard(number: Long, securityCode: Int, expirationDate: Long) {
         val digitalCard = DigitalCard(
-            number,
-            1234,
-            _bankCode.value!!.toString(),
-            CardUtils.getBrandCard(number)?.code ?: 0,
-            _cardTypeCode.value!!,
-            securityCode,
-            expirationDate
+            number = number,
+            ownerClientId = 1234,
+            bank = bankCode.value!!.toString(),
+            brand = CardUtils.getBrandCard(number)?.code ?: 0,
+            type = cardTypeCode.value!!,
+            securityCode = securityCode,
+            expirationDate = expirationDate
         )
         viewModelScope.launch(Dispatchers.IO) {
             addDigitalCardActivity.invoke(digitalCard)
         }
     }
 
-    fun onCardTypeSelected(cardTypeCode: Int) {
-        _cardTypeCode.value = cardTypeCode
+    fun onCardTypeSelected(typeCode: Int) {
+        cardTypeCode.value = typeCode
     }
 
     fun onBankSelected(bankSelected: Int) {
-        _bankCode.value = bankSelected
+        bankCode.value = bankSelected
     }
 
     fun formatCardNumber(cardNumber: String): String {
