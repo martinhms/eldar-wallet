@@ -3,6 +3,10 @@ package com.org.marton.studio.project.eldarwallet.ui.activities.qrpay
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -14,13 +18,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.org.marton.studio.project.eldarwallet.R
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
-import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
+import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.DigitalCardQrAdapter
+import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class QrPayActivity : AppCompatActivity() {
+class QrPayActivity : AppCompatActivity(), OnCardClickListener {
 
     private val viewModel: QrPayViewModel by viewModels()
+    private var selectedCardNumber: Long? = null
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,12 +39,37 @@ class QrPayActivity : AppCompatActivity() {
             insets
         }
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-
+        val bottomGenerateQr: Button = findViewById(R.id.generatePaymentButton)
         viewModel.userData.observe(this) { userData ->
             val recyclerView: RecyclerView = findViewById(R.id.selectCardsPayRV)
-            val adapter = DigitalCardAdapter(userData.cards ?: emptyList())
+            val adapter = DigitalCardQrAdapter(userData.cards ?: emptyList(), this)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
+        }
+
+        val imageView: ImageView = findViewById(R.id.qrCodeImageView)
+        viewModel.qrCodeBitmap.observe(this) { bitmap ->
+            imageView.setImageBitmap(bitmap)
+        }
+
+        viewModel.isQeGenerated.observe(this) {
+            if (!it) {
+                imageView.visibility = View.INVISIBLE
+            } else {
+                imageView.visibility = View.VISIBLE
+            }
+        }
+        viewModel.errorQr.observe(this) { errorMessage ->
+            errorMessage?.let {
+                if (it.isNotEmpty()) {
+                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        bottomGenerateQr.setOnClickListener {
+            val qrData = viewModel.getUserName() + ":" + (selectedCardNumber?.toString() ?: "")
+            viewModel.generateQrCode(qrData)
         }
 
         bottomNavigationView.setOnItemSelectedListener { item ->
@@ -63,5 +94,9 @@ class QrPayActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
+
+    override fun onCardClick(cardNumber: Long) {
+        selectedCardNumber = cardNumber
     }
 }
