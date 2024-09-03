@@ -19,13 +19,13 @@ constructor(private val digitalCardDao: DigitalCardDao) {
         digitalCardDao.getDigitalCard(clientId = clientId).map { items ->
             items.map {
                 DigitalCard(
-                    it.number,
-                    it.ownerClientId,
-                    it.type,
-                    it.bankname,
-                    it.managmentName,
-                    it.securityCode,
-                    it.expirationDate
+                    number = it.number,
+                    ownerClientId = it.ownerClientId,
+                    type = it.type,
+                    bank = it.bank,
+                    brand = it.brand,
+                    securityCode = it.securityCode,
+                    expirationDate = it.expirationDate
                 )
             }
         }
@@ -43,8 +43,8 @@ fun DigitalCard.toData(): DigitalCardEntity {
     return DigitalCardEntity(
         number = this.number,
         ownerClientId = this.ownerClientId,
-        bankname = this.bankname,
-        managmentName = this.managmentName,
+        bank = this.bank,
+        brand = this.brand,
         type = this.type,
         expirationDate = this.expirationDate,
         securityCode = this.securityCode
