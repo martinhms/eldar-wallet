@@ -1,9 +1,8 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.main
+package com.org.marton.studio.project.eldarwallet.ui.activities.qrpay
 
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
@@ -13,32 +12,34 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.marton.studio.project.eldarwallet.R
-import com.org.marton.studio.project.eldarwallet.ui.activities.addcard.AddDigitalCardActivity
+import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter.DigitalCardAdapter
-import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class QrPayActivity : AppCompatActivity() {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: QrPayViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_qr_pay)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val addCardButton: FloatingActionButton = findViewById(R.id.agregarTarjetaButton)
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
-        val balanceTextView: TextView = findViewById(R.id.balanceTextView)
-        val usernameTextView: TextView = findViewById(R.id.usernameEditText)
+
+        viewModel.userData.observe(this) { userData ->
+            val recyclerView: RecyclerView = findViewById(R.id.selectCardsPayRV)
+            val adapter = DigitalCardAdapter(userData.cards ?: emptyList())
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(this)
+        }
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -62,23 +63,5 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        viewModel.userData.observe(this) { userData ->
-            usernameTextView.text = getGreattings(userData.userName + " " + userData.userLastname)
-            balanceTextView.text = String.format("$ %.2f", userData.balance)
-
-            val recyclerView: RecyclerView = findViewById(R.id.tarjetasRecyclerView)
-            val adapter = DigitalCardAdapter(userData.cards ?: emptyList())
-            recyclerView.adapter = adapter
-            recyclerView.layoutManager = LinearLayoutManager(this)
-        }
-
-        addCardButton.setOnClickListener {
-            intent = Intent(this, AddDigitalCardActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun getGreattings(s: String): String {
-        return "Hi $s!"
     }
 }
