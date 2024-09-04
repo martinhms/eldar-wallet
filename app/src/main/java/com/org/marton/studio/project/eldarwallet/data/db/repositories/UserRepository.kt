@@ -19,7 +19,6 @@ constructor(private val userDao: UserDao) {
         userDao.getUser(id).map { entity->
             entity?.let {
                 UserData(
-                    id = entity.id,
                     userName = entity.userName,
                     userLastname = entity.userLastname,
                     password = entity.password,
@@ -32,7 +31,6 @@ constructor(private val userDao: UserDao) {
                     deletedTime = entity.deletedTime
                 )
             } ?: UserData(
-                id = 0,
                 userName = "",
                 userLastname = "",
                 password = "",
@@ -46,6 +44,25 @@ constructor(private val userDao: UserDao) {
             )
         }
 
+    fun getUserByUsernamePassword(username: String, password: String): Flow<UserData?> =
+        userDao.getUserByUsernamePassword(username, password).map { entity->
+            entity?.let {
+                UserData(
+                    id = entity.id,
+                    userName = entity.userName,
+                    userLastname = entity.userLastname,
+                    password = entity.password,
+                    identification = entity.identification,
+                    email = entity.email,
+                    avatar = entity.avatar,
+                    balance = entity.balance,
+                    createdTime = entity.createdTime,
+                    updatedTime = entity.updatedTime,
+                    deletedTime = entity.deletedTime
+                )
+            }
+        }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun createUser(userData: UserData) {
         val entity = userData.toData().copy(createdTime = System.currentTimeMillis())
@@ -57,12 +74,11 @@ constructor(private val userDao: UserDao) {
 @RequiresApi(Build.VERSION_CODES.O)
 fun UserData.toData(): UserEntity {
     return UserEntity(
-        id = this.id,
         userName = this.userName,
         userLastname = this.userLastname,
         password = this.password,
-        identification = this.identification,
-        email = this.email,
+        identification = this.identification ?: "",
+        email = this.email?: "",
         avatar = this.avatar ?: "",
         balance = this.balance,
         createdTime = this.createdTime,

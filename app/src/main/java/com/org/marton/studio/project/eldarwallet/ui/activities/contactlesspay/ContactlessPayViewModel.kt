@@ -10,6 +10,7 @@ import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDataUseCa
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDigitalCardsUseCase
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
+import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +30,7 @@ class ContactlessPayViewModel @Inject constructor(
     val selectedCard: LiveData<DigitalCard> = _selectedCard
 
     init {
-        getUserData("1234")
+        getUserData(SessionData.userId.value.toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -37,7 +38,6 @@ class ContactlessPayViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             getUserDataUseCase(userId).collect { userData ->
                 getUserDigitalCardsUseCase(userId).collect { digitalCards ->
-                    val balance = getBalance()
                     _userData.postValue(
                         UserData(
                             id = userData.id,
@@ -45,7 +45,7 @@ class ContactlessPayViewModel @Inject constructor(
                             userLastname = userData.userLastname,
                             password = userData.password,
                             cards = digitalCards,
-                            balance = balance,
+                            balance = userData.balance,
                             identification = userData.identification,
                             email = userData.email,
                             avatar = userData.avatar,
@@ -61,7 +61,4 @@ class ContactlessPayViewModel @Inject constructor(
     fun setSelectedCard(card: DigitalCard) {
         _selectedCard.value = card
     }
-
-
-    private fun getBalance() = 1500.0
 }

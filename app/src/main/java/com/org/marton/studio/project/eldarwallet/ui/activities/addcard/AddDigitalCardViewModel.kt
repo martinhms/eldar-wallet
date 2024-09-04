@@ -11,6 +11,7 @@ import com.org.marton.studio.project.eldarwallet.domain.model.CardBrand
 import com.org.marton.studio.project.eldarwallet.domain.usecase.AddDigitalCardUseCase
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
+import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class AddDigitalCardViewModel @Inject constructor(
     fun addDigitalCard(number: Long, securityCode: Int, expirationDate: Long) {
         val digitalCard = DigitalCard(
             number = number,
-            ownerClientId = 1234,
+            ownerClientId = SessionData.get(),
             bank = bankCode.value!!.toString(),
             brand = CardUtils.getBrandCard(number)?.code ?: 0,
             type = cardTypeCode.value!!,

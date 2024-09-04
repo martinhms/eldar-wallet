@@ -12,6 +12,7 @@ import com.org.marton.studio.project.eldarwallet.domain.usecase.GenerateQrCodeUs
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDataUseCase
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDigitalCardsUseCase
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
+import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,7 +37,7 @@ class QrPayViewModel @Inject constructor(
     val isQeGenerated: LiveData<Boolean> = _isQeGenerated
 
     init {
-        getUserData("1234")
+        getUserData(SessionData.get().toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -44,7 +45,6 @@ class QrPayViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             getUserDataUseCase(userId).collect { userData ->
                 getUserDigitalCardsUseCase(userId).collect { digitalCards ->
-                    val balance = getBalance()
                     _userData.postValue(
                         UserData(
                             id = userData.id,
@@ -52,7 +52,7 @@ class QrPayViewModel @Inject constructor(
                             userLastname = userData.userLastname,
                             password = userData.password,
                             cards = digitalCards,
-                            balance = balance,
+                            balance = userData.balance,
                             identification = userData.identification,
                             email = userData.email,
                             avatar = userData.avatar,
@@ -78,8 +78,6 @@ class QrPayViewModel @Inject constructor(
             }
         }
     }
-
-    private fun getBalance() = 1500.0
 
      fun getUserName() = userData.value?.userName + " " + userData.value?.userLastname
 }

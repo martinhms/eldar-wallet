@@ -39,21 +39,4 @@ class DataBaseModule {
             .fallbackToDestructiveMigration()
             .build()
     }
-
-    @Provides
-    @Singleton
-    fun provideEncryptedSharedPreferences(application: Application):
-            SharedPreferences {
-        val masterKey = MasterKey.Builder(application)
-            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-            .build()
-
-        return EncryptedSharedPreferences.create(
-            application,
-            "user_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-    }
 }

@@ -10,6 +10,7 @@ import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDataUseCa
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDigitalCardsUseCase
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
+import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,7 +27,7 @@ class MainViewModel @Inject constructor(
     val userData: LiveData<UserData> = _userData
 
     init {
-        getUserData("1234")
+        getUserData(SessionData.userId.value.toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -34,7 +35,6 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             getUserDataUseCase(userId).collect { userData ->
                 getUserDigitalCardsUseCase(userId).collect { digitalCards ->
-                    val balance = getBalance()
                     _userData.postValue(
                         UserData(
                             id = userData.id,
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
                             userLastname = userData.userLastname,
                             password = userData.password,
                             cards = digitalCards,
-                            balance = balance,
+                            balance = userData.balance,
                             identification = userData.identification,
                             email = userData.email,
                             avatar = userData.avatar,
@@ -54,6 +54,4 @@ class MainViewModel @Inject constructor(
             }
         }
     }
-
-    private fun getBalance() = 1500.0
 }

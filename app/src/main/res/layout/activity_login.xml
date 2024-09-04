@@ -8,12 +8,12 @@
     tools:context=".ui.activities.login.LoginActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:background="#1F1E1E"
         android:orientation="vertical"
         android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,9 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/logo_eldar" />
+            android:src="@drawable/eldar_title" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
         <EditText
-            android:id="@+id/usernameEditText"
+            android:id="@+id/usernameLoginEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="@string/username"
@@ -32,8 +37,9 @@
             android:inputType="text"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
+
         <EditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/passwordLoginEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="@string/password"
@@ -41,8 +47,9 @@
             android:inputType="textPassword"
             android:textColor="@color/white"
             android:textColorHint="@color/white" />
+
         <Button
-            android:id="@+id/loginButton"
+            android:id="@+id/signInLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#B7B0B0"
@@ -53,20 +60,96 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-<!--
-        TODO: ELIMINAR BOTON
--->
         <Button
-            android:id="@+id/createUserButton"
+            android:id="@+id/signupLoginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#B7B0B0"
+            android:backgroundTint="#4A8AC4"
             android:fontFamily="sans-serif-black"
-            android:text="create user"
+            android:text="@string/sign_up"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/usernameFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/lastnameFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lastname"
+            android:inputType="text"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/passwordFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/repasswordFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/repassword"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/emailFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <EditText
+            android:id="@+id/identificationFormEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/username"
+            android:hint="@string/identification_number"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white" />
+
+        <Button
+            android:id="@+id/confirmFormButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#B7B0B0"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/confirm"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/cancelFormButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4A8AC4"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
+    ¡
 </androidx.constraintlayout.widget.ConstraintLayout>
