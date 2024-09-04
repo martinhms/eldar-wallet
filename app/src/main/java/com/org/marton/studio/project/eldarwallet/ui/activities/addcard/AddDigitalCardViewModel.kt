@@ -28,12 +28,12 @@ class AddDigitalCardViewModel @Inject constructor(
     @RequiresApi(Build.VERSION_CODES.P)
     fun addDigitalCard(number: Long, securityCode: Int, expirationDate: Long) {
         val digitalCard = DigitalCard(
-            number = number,
+            number = number.toString(),
             ownerClientId = SessionData.get(),
             bank = bankCode.value!!.toString(),
             brand = CardUtils.getBrandCard(number)?.code ?: 0,
             type = cardTypeCode.value!!,
-            securityCode = securityCode,
+            securityCode = securityCode.toString(),
             expirationDate = expirationDate
         )
         viewModelScope.launch(Dispatchers.IO) {

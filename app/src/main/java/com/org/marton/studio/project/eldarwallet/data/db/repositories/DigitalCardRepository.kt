@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import com.org.marton.studio.project.eldarwallet.data.db.DigitalCardDao
 import com.org.marton.studio.project.eldarwallet.data.db.entities.DigitalCardEntity
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
+import com.org.marton.studio.project.eldarwallet.utils.EncryptionHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -19,12 +20,12 @@ constructor(private val digitalCardDao: DigitalCardDao) {
         digitalCardDao.getDigitalCard(clientId = clientId).map { items ->
             items.map {
                 DigitalCard(
-                    number = it.number,
+                    number = EncryptionHelper.decryptData(it.number).toString(),
                     ownerClientId = it.ownerClientId,
                     type = it.type,
                     bank = it.bank,
                     brand = it.brand,
-                    securityCode = it.securityCode,
+                    securityCode = EncryptionHelper.decryptData(it.securityCode).toString(),
                     expirationDate = it.expirationDate
                 )
             }
@@ -32,21 +33,26 @@ constructor(private val digitalCardDao: DigitalCardDao) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun addDigitalCard(digitalCard: DigitalCard) {
-        val entity = digitalCard.toData()
+        val encryptedCardNumber = EncryptionHelper.encryptData(digitalCard.number.toLong())
+        val encryptedSecurityCode = EncryptionHelper.encryptData(digitalCard.securityCode.toLong())
+
+        val entity = digitalCard.toData(encryptedCardNumber, encryptedSecurityCode)
         digitalCardDao.addDigitalCard(entity)
     }
 }
 
-
 @RequiresApi(Build.VERSION_CODES.O)
-fun DigitalCard.toData(): DigitalCardEntity {
+fun DigitalCard.toData(
+    encryptedCardNumber: String,
+    encryptedSecurityCode: String
+): DigitalCardEntity {
     return DigitalCardEntity(
-        number = this.number,
+        number = encryptedCardNumber,
         ownerClientId = this.ownerClientId,
         bank = this.bank,
         brand = this.brand,
         type = this.type,
         expirationDate = this.expirationDate,
-        securityCode = this.securityCode
+        securityCode = encryptedSecurityCode,
     )
 }

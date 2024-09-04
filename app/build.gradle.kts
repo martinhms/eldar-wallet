@@ -55,6 +55,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.gson.converter)
 
+    implementation(libs.tink.android)
+    implementation(libs.commons.codec)
+    implementation(libs.androidx.security.crypto)
+
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

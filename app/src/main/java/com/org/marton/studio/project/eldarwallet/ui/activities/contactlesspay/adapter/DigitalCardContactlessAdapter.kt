@@ -40,7 +40,7 @@ class DigitalCardContactlessAdapter(
             holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color))
         }
         holder.cardBankNameTextView.text = CardUtils.getBankNameByCode(digitalCard.bank.toInt())
-        holder.cardNumberTextView.text = CardUtils.formatCardNumber(digitalCard.number)
+        holder.cardNumberTextView.text = CardUtils.formatCardNumber(digitalCard.number.toLong())
         holder.cardManagmentNameTextView.text = CardUtils.getBrandCardNameByCode(digitalCard.brand)
         holder.cardTypeTextView.text = CardUtils.getTypeCardDescByCode(digitalCard.type)
         holder.itemView.setOnClickListener {
