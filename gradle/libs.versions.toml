@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.0"
 androidDatabaseSqlcipher = "4.5.0"
+commonsCodec = "1.15"
 hilt = "2.51.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
@@ -18,11 +19,13 @@ room = "2.5.0"
 retrofit = "2.9.0"
 gson = "2.9.0"
 securityCrypto = "1.1.0-alpha06"
+tinkAndroid = "1.8.0"
 
 [libraries]
 android-database-sqlcipher = { module = "net.zetetic:android-database-sqlcipher", version.ref = "androidDatabaseSqlcipher" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-security-crypto = { module = "androidx.security:security-crypto", version.ref = "securityCrypto" }
+commons-codec = { module = "commons-codec:commons-codec", version.ref = "commonsCodec" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -43,6 +46,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 gson_converter = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
 
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+tink-android = { module = "com.google.crypto.tink:tink-android", version.ref = "tinkAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

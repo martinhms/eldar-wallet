@@ -99,6 +99,6 @@ class QrPayActivity : AppCompatActivity(), OnCardClickListener {
     }
 
     override fun onCardClick(selectedItem: DigitalCard) {
-        selectedCardNumber = selectedItem.number
+        selectedCardNumber = selectedItem.number.toLong()
     }
 }

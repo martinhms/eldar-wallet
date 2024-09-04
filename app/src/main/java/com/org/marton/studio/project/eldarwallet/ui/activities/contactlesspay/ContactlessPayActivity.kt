@@ -77,7 +77,7 @@ class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
         viewModel.selectedCard.observe(this) { selectedCard ->
             cardBrandTextView.text = CardUtils.getBrandCardNameByCode(selectedCard.brand)
             cardTypeTextView.text = CardUtils.getTypeCardDescByCode(selectedCard.type)
-            cardNumberTextView.text = CardUtils.formatCardNumber(selectedCard.number)
+            cardNumberTextView.text = CardUtils.formatCardNumber(selectedCard.number.toLong())
         }
     }
 
