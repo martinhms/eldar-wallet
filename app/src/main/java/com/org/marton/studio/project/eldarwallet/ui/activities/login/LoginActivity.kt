@@ -82,13 +82,16 @@ class LoginActivity : AppCompatActivity() {
                 usernameLoginEditText.text.toString(),
                 passwordLoginEditText.text.toString()
             )
-            if (SessionData.isUserLoggedIn()){
+        }
+
+        viewModel.loginState.observe(this) { loginSuccessful ->
+            if (loginSuccessful) {
                 Intent(this, MainActivity::class.java)
                     .also {
                         startActivity(it)
                         finish()
                     }
-            }else{
+            } else {
                 Toast.makeText(this, "Wrong Credentials", Toast.LENGTH_SHORT).show()
             }
         }

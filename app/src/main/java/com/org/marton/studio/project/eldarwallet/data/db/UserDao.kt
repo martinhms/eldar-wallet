@@ -12,6 +12,9 @@ import kotlinx.coroutines.flow.Flow
 @SuppressWarnings("UNCHECKED_CAST")
 interface UserDao {
 
+    @Query("SELECT COUNT(*) FROM UserEntity")
+    fun getUsersCount(): Flow<Int>
+
     @Query("SELECT * FROM UserEntity WHERE id = :id")
     fun getUser(id: String): Flow<UserEntity?>
 

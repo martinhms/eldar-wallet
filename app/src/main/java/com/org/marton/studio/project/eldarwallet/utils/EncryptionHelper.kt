@@ -1,14 +1,12 @@
 package com.org.marton.studio.project.eldarwallet.utils
 
 import android.content.Context
-import android.util.Log
 import com.google.crypto.tink.Aead
 import com.google.crypto.tink.aead.AeadFactory
 import com.google.crypto.tink.aead.AeadKeyTemplates
 import com.google.crypto.tink.integration.android.AndroidKeysetManager
 import org.apache.commons.codec.binary.Base64
 import java.nio.ByteBuffer
-import java.security.GeneralSecurityException
 
 object EncryptionHelper {
     private lateinit var aead: Aead
