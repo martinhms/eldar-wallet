@@ -46,13 +46,15 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
+    implementation(libs.android.database.sqlcipher)
+    implementation(libs.androidx.security.crypto)
     //LiveData-ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    // Retrofit - Gson
-    //Picasso
+    // Retrofit - Gson -Picasso
     implementation(libs.picasso)
     implementation(libs.retrofit)
     implementation(libs.gson.converter)
+
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

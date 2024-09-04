@@ -13,7 +13,10 @@ import kotlinx.coroutines.flow.Flow
 interface UserDao {
 
     @Query("SELECT * FROM UserEntity WHERE id = :id")
-    fun getUser(id:String): Flow<UserEntity?>
+    fun getUser(id: String): Flow<UserEntity?>
+
+    @Query("SELECT * FROM UserEntity WHERE username = :username AND password = :password")
+    fun getUserByUsernamePassword(username: String, password: String): Flow<UserEntity?>
 
     @Insert
     fun createUser(item: UserEntity)

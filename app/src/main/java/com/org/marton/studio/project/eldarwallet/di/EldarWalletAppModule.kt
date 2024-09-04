@@ -1,7 +1,11 @@
 package com.org.marton.studio.project.eldarwallet.di
 
+import android.app.Application
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.room.Room
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.org.marton.studio.project.eldarwallet.data.db.DataBase
 import com.org.marton.studio.project.eldarwallet.data.db.DigitalCardDao
 import com.org.marton.studio.project.eldarwallet.data.db.UserDao
@@ -20,6 +24,7 @@ class DataBaseModule {
     fun provideUserDao(dataBase: DataBase): UserDao {
         return dataBase.userDao()
     }
+
     @Provides
     fun provideDigitalCardDao(dataBase: DataBase): DigitalCardDao {
         return dataBase.digitalCardDao()
