@@ -13,7 +13,7 @@
     <string name="balance_tab">Balance</string>
     <string name="security_code">Security code</string>
     <string name="add_new_card">Add new Card</string>
-    <string name="expiration_date_yyyymm">Expiration Date (YYYYMM)</string>
+    <string name="expiration_date_yyyymm">Expiration Date (MM/YY)</string>
     <string name="owner_name">Owner name</string>
     <string name="card_number">Card number</string>
     <string name="btn_pay">Generate QR pay</string>

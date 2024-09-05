@@ -25,7 +25,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels()
-
+    companion object {
+        var selectedItemId = R.id.main_activity_tab
+    }
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,8 @@ class MainActivity : AppCompatActivity() {
         val usernameTextView: TextView = findViewById(R.id.usernameEditText)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
+            selectedItemId = item.itemId
+
             when (item.itemId) {
                 R.id.qr_paid_tab -> {
                     intent = Intent(this, QrPayActivity::class.java)
@@ -60,7 +64,10 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+
         }
+        bottomNavigationView.selectedItemId = selectedItemId
+
         viewModel.userData.observe(this) { userData ->
             usernameTextView.text = getGreattings(userData.userName + " " + userData.userLastname)
             balanceTextView.text = String.format("$ %.2f", userData.balance)

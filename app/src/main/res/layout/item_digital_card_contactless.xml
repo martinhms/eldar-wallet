@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,6 @@
             android:id="@+id/cardBankNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre del banco"
             android:textColor="#333333"
             android:textSize="18sp"
             android:padding="30dp"
@@ -29,7 +28,6 @@
             android:id="@+id/cardManagmentNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="VISA"
             android:textAlignment="textEnd"
             android:textColor="#666666"
             android:padding="30dp"
@@ -41,7 +39,6 @@
             android:id="@+id/cardTypeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Débito"
             android:textAlignment="textEnd"
             android:textColor="#666666"
             android:textSize="14sp"
@@ -53,7 +50,6 @@
             android:id="@+id/cardNumberSelectedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="**** **** **** 1234"
             android:textColor="#666666"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

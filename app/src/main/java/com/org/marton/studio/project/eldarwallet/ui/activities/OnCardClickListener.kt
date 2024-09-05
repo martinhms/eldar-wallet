@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter
+package com.org.marton.studio.project.eldarwallet.ui.activities
 
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 

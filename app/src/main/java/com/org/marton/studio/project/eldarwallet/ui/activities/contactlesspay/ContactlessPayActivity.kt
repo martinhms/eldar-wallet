@@ -17,7 +17,7 @@ import com.org.marton.studio.project.eldarwallet.R
 import com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.adapter.DigitalCardContactlessAdapter
 import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
 import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.QrPayActivity
-import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
+import com.org.marton.studio.project.eldarwallet.ui.activities.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,8 +43,10 @@ class ContactlessPayActivity : AppCompatActivity(), OnCardClickListener {
         val cardNumberTextView: TextView = findViewById(R.id.cardNumberSelectedTextView)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView.selectedItemId = MainActivity.selectedItemId
 
         bottomNavigationView.setOnItemSelectedListener { item ->
+            MainActivity.selectedItemId = item.itemId
             when (item.itemId) {
                 R.id.qr_paid_tab -> {
                     intent = Intent(this, QrPayActivity::class.java)

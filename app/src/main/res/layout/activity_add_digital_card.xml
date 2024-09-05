@@ -5,22 +5,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#333333"
     tools:context=".ui.activities.addcard.AddDigitalCardActivity">
 
+    <ImageView
+        android:id="@+id/imgEldarView"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/eldar_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         app:cardCornerRadius="15dp"
         app:cardElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardHeaderMainView"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgEldarView">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:background="@drawable/gradient_card_background"
             android:orientation="vertical"
             android:padding="15dp">
 
@@ -31,9 +43,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="end"
-                android:text=""
-                android:textColor="@android:color/white"
-                android:textColorHint="@color/white" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/cardNumberSelectedTextView"
@@ -41,7 +51,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text=""
-                android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -50,7 +59,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text=""
-                android:textColor="@android:color/white"
                 android:textSize="16sp" />
 
             <TextView
@@ -59,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:text=""
-                android:textColor="@android:color/white"
                 android:textSize="16sp" />
         </LinearLayout>
 
@@ -72,74 +79,69 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#333333"
             android:orientation="vertical"
             android:padding="16dp">
+
             <EditText
                 android:id="@+id/editTextNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/card_number"
                 android:inputType="number"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:maxLength="16"/>
+                android:maxLength="16" />
+
             <EditText
                 android:id="@+id/editTexClientName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:hint="@string/owner_name"
-                android:inputType="text"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white" />
+                android:inputType="text" />
+
             <Spinner
                 android:id="@+id/dropdown_menu_card_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white" />
+                android:background="@drawable/spinner_border"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:inputType="text" />
+
             <Spinner
                 android:id="@+id/dropdown_menu_banck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white" />
+                android:background="@drawable/spinner_border"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:inputType="text" />
+
             <EditText
                 android:id="@+id/editTextSecurityCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/security_code"
                 android:inputType="number"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:maxLength="3"/>
+                android:maxLength="3" />
+
             <EditText
                 android:id="@+id/editTextExpirationDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/expiration_date_yyyymm"
-                android:inputType="datetime"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white" />
-
+                android:maxLength="5"
+                android:inputType="date" />
             <Button
                 android:id="@+id/buttonCreateCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/add_new_card"
-                android:textColorHint="@color/white"
-                android:background="@color/white"/>
+                android:text="@string/add_new_card" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

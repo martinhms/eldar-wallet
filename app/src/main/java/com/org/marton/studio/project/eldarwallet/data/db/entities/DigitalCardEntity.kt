@@ -12,5 +12,5 @@ data class DigitalCardEntity(
     val brand: Int,
     val type: Int,
     val securityCode: String,
-    val expirationDate: Long
+    val expirationDate: String
 )
