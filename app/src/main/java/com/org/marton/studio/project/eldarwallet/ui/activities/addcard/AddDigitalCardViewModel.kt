@@ -1,6 +1,7 @@
 package com.org.marton.studio.project.eldarwallet.ui.activities.addcard
 
 import android.os.Build
+import android.text.Editable
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,8 +26,11 @@ class AddDigitalCardViewModel @Inject constructor(
     private val cardTypeCode = MutableLiveData<Int>()
     private val bankCode = MutableLiveData<Int>()
 
+    private val _expirationDate = MutableLiveData<String>()
+    val expirationDate: LiveData<String> = _expirationDate
+
     @RequiresApi(Build.VERSION_CODES.P)
-    fun addDigitalCard(number: Long, securityCode: Int, expirationDate: Long) {
+    fun addDigitalCard(number: Long, securityCode: Int, expirationDate: String) {
         val digitalCard = DigitalCard(
             number = number.toString(),
             ownerClientId = SessionData.get(),
@@ -59,5 +63,15 @@ class AddDigitalCardViewModel @Inject constructor(
             formattedNumber.append(cleanedNumber[i])
         }
         return formattedNumber.toString()
+    }
+
+    fun formatExpirationDate(editable: Editable) {
+        val text = editable.toString().replace("/", "")
+        if (text.length >= 2) {
+            val formattedText = "${text.substring(0, 2)}/${text.substring(2)}"
+            _expirationDate.value = formattedText
+        } else {
+            _expirationDate.value = text
+        }
     }
 }

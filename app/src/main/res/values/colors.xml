@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="selected_card_color">#DDDDDD</color>
     <color name="default_card_color">#FFFFFF</color>
+    <color name="eldar_blue">#007bff</color>
+    <color name="lime_green">#78c2ad</color>
+    <color name="neutral_gray">#f8f9fa</color>
+    <color name="golden_yellow">#ffd700</color>
+    <color name="coral_red">#ff7f50</color>
 </resources>

@@ -1,14 +1,18 @@
 package com.org.marton.studio.project.eldarwallet.ui.activities.addcard
 
+import android.app.DatePickerDialog
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.NumberPicker
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -23,11 +27,14 @@ import com.org.marton.studio.project.eldarwallet.domain.model.Bank
 import com.org.marton.studio.project.eldarwallet.domain.model.CardType
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Calendar
+import java.util.Locale
 
 @AndroidEntryPoint
 class AddDigitalCardActivity : AppCompatActivity() {
 
     private val viewModel: AddDigitalCardViewModel by viewModels()
+    private var isFormatting = false
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +113,7 @@ class AddDigitalCardActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                cardClientNameTextView.text = s.toString()
+                cardClientNameTextView.text = s.toString().uppercase(Locale.getDefault())
             }
         })
 
@@ -114,7 +121,17 @@ class AddDigitalCardActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                cardExpiryDateTextView.text = s.toString()
+                if (!isFormatting) {
+                    isFormatting = true
+                    val text = s.toString().replace("/", "")
+                    if (text.length >= 2) {
+                        val formattedText = "${text.substring(0, 2)}/${text.substring(2)}"
+                        editTextExpirationDate.setText(formattedText)
+                        editTextExpirationDate.setSelection(formattedText.length)
+                        cardExpiryDateTextView.text = formattedText
+                    }
+                    isFormatting = false
+                }
             }
         })
 
@@ -122,7 +139,7 @@ class AddDigitalCardActivity : AppCompatActivity() {
             viewModel.addDigitalCard(
                 number = editTextNumber.text.toString().toLongOrNull() ?: 0,
                 securityCode = editTextSecurityCode.text.toString().toIntOrNull() ?: 0,
-                expirationDate = editTextExpirationDate.text.toString().toLongOrNull() ?: 0
+                expirationDate = editTextExpirationDate.text.toString()
             )
 
             Toast.makeText(this, "Tarjeta creada", Toast.LENGTH_SHORT).show()

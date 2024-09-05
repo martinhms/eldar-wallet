@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.org.marton.studio.project.eldarwallet.R
-import com.org.marton.studio.project.eldarwallet.ui.activities.qrpay.adapter.OnCardClickListener
+import com.org.marton.studio.project.eldarwallet.ui.activities.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 

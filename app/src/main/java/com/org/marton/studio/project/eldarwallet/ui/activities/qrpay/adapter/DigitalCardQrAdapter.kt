@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.activities.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 
@@ -34,9 +35,9 @@ class DigitalCardQrAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val digitalCard = digitalCards[position]
         if (position == selectedItemPosition) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selected_card_color)) // Cambia el color de fondo
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.selected_card_color))
         } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color)) // Restaura el color de fondo
+            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.default_card_color))
         }
         holder.cardBankNameTextView.text = CardUtils.getBankNameByCode(digitalCard.bank.toInt())
         holder.cardNumberTextView.text = CardUtils.formatCardNumber(digitalCard.number.toLong())

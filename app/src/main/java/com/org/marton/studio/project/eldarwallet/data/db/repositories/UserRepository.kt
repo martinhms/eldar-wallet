@@ -14,6 +14,8 @@ import javax.inject.Singleton
 class UserRepository @Inject
 constructor(private val userDao: UserDao) {
 
+    fun getUsersCount(): Flow<Int> = userDao.getUsersCount()
+
     @RequiresApi(Build.VERSION_CODES.P)
     fun getUser(id: String): Flow<UserData> =
         userDao.getUser(id).map { entity->
