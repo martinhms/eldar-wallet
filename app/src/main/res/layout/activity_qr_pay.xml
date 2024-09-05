@@ -16,6 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/selectQRCardTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_the_card_qr"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qrCodeImageView" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/selectCardsPayRV"
         android:layout_width="0dp"
@@ -23,7 +32,7 @@
         app:layout_constraintBottom_toTopOf="@+id/generatePaymentButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qrCodeImageView"
+        app:layout_constraintTop_toBottomOf="@+id/selectQRCardTextView"
         tools:listitem="@layout/item_digital_card" />
 
     <Button

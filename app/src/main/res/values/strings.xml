@@ -20,6 +20,7 @@
 
     <string name="rapi_api_key">9a4f5a900dmsh074679de11bc8d9p1f1dcejsn2bc518e00e15</string>
     <string name="choose_the_card">Choose the card</string>
+    <string name="choose_the_card_qr">Choose the card and generate your QR</string>
     <string name="selected_card">Selected Card</string>
     <string name="sign_up">Sign Up</string>
     <string name="email">Email</string>
@@ -28,5 +29,6 @@
     <string name="identification_number">Identification number</string>
     <string name="lastname">Lastname</string>
     <string name="logout">Logout</string>
+    <string name="pay">Pay</string>
 
 </resources>
