@@ -12,13 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:orientation="vertical"
+        android:background="@drawable/gradient_card_background"
         android:padding="12dp">
 
         <TextView
             android:id="@+id/cardBankNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#333333"
+            android:textColor="@color/default_card_color"
             android:textSize="18sp"
             android:padding="30dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
-            android:textColor="#666666"
+            android:textColor="@color/default_card_color"
             android:padding="30dp"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
-            android:textColor="#666666"
+            android:textColor="@color/default_card_color"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/cardManagmentNameTextView"
             app:layout_constraintStart_toStartOf="@+id/cardManagmentNameTextView"
@@ -50,7 +51,7 @@
             android:id="@+id/cardNumberSelectedTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#666666"
+            android:textColor="@color/default_card_color"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

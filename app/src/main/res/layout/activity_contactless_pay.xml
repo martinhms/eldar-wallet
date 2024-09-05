@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activities.contactlesspay.ContactlessPayActivity">
-
-    <ImageView
-        android:id="@+id/imgEldarContactlessView"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/eldar_title"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarContactless"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/toolbar_menu"
+        app:title="Contactless Pay"
+        app:titleTextColor="@color/black" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgEldarContactlessView">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarContactless">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"

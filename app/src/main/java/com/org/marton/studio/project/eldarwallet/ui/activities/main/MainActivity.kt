@@ -44,13 +44,14 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         val addCardButton: FloatingActionButton = findViewById(R.id.agregarTarjetaButton)
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)
         val balanceTextView: TextView = findViewById(R.id.balanceTextView)
         val usernameTextView: TextView = findViewById(R.id.usernameEditText)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             selectedItemId = item.itemId
