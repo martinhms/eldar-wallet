@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_weight="1"
     tools:context=".ui.ApplicationActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -23,7 +24,7 @@
         android:id="@+id/frameApplicationContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1" />
+        android:layout_weight="10" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.org.marton.studio.project.eldarwallet.R
 import com.org.marton.studio.project.eldarwallet.ui.activities.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.activities.login.LoginActivity
-import com.org.marton.studio.project.eldarwallet.ui.adapters.DigitalCardQrAdapter
+import com.org.marton.studio.project.eldarwallet.ui.adapters.DigitalCardAdapter
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,18 +42,17 @@ class QrPayFragment : Fragment(), OnCardClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         val bottomGenerateQr: Button = view.findViewById(R.id.generatePaymentButton)
         val recyclerView: RecyclerView = view.findViewById(R.id.selectCardsPayRV)
         val imageView: ImageView = view.findViewById(R.id.qrCodeImageView)
 
         viewModel.userData.observe(viewLifecycleOwner) { userData ->
-            val adapter = DigitalCardQrAdapter(userData.cards ?: emptyList(), this)
+            val adapter = DigitalCardAdapter(
+                userData.cards ?: emptyList(),
+                this,
+                R.layout.item_digital_card,
+                true
+            )
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
@@ -86,11 +85,5 @@ class QrPayFragment : Fragment(), OnCardClickListener {
 
     override fun onCardClick(selectedItem: DigitalCard) {
         selectedCardNumber = selectedItem.number.toLong()
-    }
-
-    private fun logout() {
-        SessionData.logout()
-        val intent = Intent(requireContext(), LoginActivity::class.java)
-        startActivity(intent)
     }
 }

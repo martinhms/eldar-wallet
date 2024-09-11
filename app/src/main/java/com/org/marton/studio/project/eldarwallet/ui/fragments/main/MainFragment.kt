@@ -16,20 +16,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.org.marton.studio.project.eldarwallet.R
+import com.org.marton.studio.project.eldarwallet.ui.activities.OnCardClickListener
 import com.org.marton.studio.project.eldarwallet.ui.activities.addcard.AddDigitalCardActivity
 import com.org.marton.studio.project.eldarwallet.ui.adapters.DigitalCardAdapter
+import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), OnCardClickListener {
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -37,11 +37,6 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
         val addCardButton: FloatingActionButton = view.findViewById(R.id.agregarTarjetaButton)
         val balanceTextView: TextView = view.findViewById(R.id.balanceTextView)
         val usernameTextView: TextView = view.findViewById(R.id.usernameEditText)
@@ -51,7 +46,12 @@ class MainFragment : Fragment() {
             usernameTextView.text = getGreattings(userData.userName + " " + userData.userLastname)
             balanceTextView.text = String.format("$ %.2f", userData.balance)
 
-            val adapter = DigitalCardAdapter(userData.cards ?: emptyList())
+            val adapter = DigitalCardAdapter(
+                userData.cards ?: emptyList(),
+                null,
+                R.layout.item_digital_card,
+                false
+            )
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
         }
@@ -64,5 +64,9 @@ class MainFragment : Fragment() {
 
     private fun getGreattings(s: String): String {
         return "Hi $s!"
+    }
+
+    override fun onCardClick(selectedItem: DigitalCard) {
+        TODO("Not yet implemented")
     }
 }
