@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.main.adapter
+package com.org.marton.studio.project.eldarwallet.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View

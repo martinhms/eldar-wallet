@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.main
+package com.org.marton.studio.project.eldarwallet.ui.fragments.main
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDataUseCase
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDigitalCardsUseCase
-import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
 import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.org.marton.studio.project.eldarwallet.R
-import com.org.marton.studio.project.eldarwallet.ui.activities.main.MainActivity
+import com.org.marton.studio.project.eldarwallet.ui.ApplicationActivity
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
 import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (SessionData.isUserLoggedIn()) {
-            Intent(this, MainActivity::class.java)
+            Intent(this, ApplicationActivity::class.java)
                 .also {
                     startActivity(it)
                     finish()
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.loginState.observe(this) { loginSuccessful ->
             if (loginSuccessful) {
-                Intent(this, MainActivity::class.java)
+                Intent(this, ApplicationActivity::class.java)
                     .also {
                         startActivity(it)
                         finish()
@@ -135,6 +135,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     private fun setVisibilityObsercer(
         usernameEditText: EditText,
         passwordEditText: EditText,

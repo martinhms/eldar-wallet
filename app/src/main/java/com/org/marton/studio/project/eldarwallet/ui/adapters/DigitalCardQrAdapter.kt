@@ -1,4 +1,4 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.contactlesspay.adapter
+package com.org.marton.studio.project.eldarwallet.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +11,11 @@ import com.org.marton.studio.project.eldarwallet.ui.activities.OnCardClickListen
 import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.utils.CardUtils
 
-class DigitalCardContactlessAdapter(
+class DigitalCardQrAdapter(
     private val digitalCards: List<DigitalCard>,
     private val listener: OnCardClickListener
 ) :
-    RecyclerView.Adapter<DigitalCardContactlessAdapter.ViewHolder>() {
+    RecyclerView.Adapter<DigitalCardQrAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardBankNameTextView: TextView = itemView.findViewById(R.id.cardBankNameTextView)
         val cardNumberTextView: TextView = itemView.findViewById(R.id.cardNumberSelectedTextView)
@@ -28,7 +28,7 @@ class DigitalCardContactlessAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_digital_card_contactless, parent, false)
+            .inflate(R.layout.item_digital_card, parent, false)
         return ViewHolder(itemView)
     }
 
@@ -53,4 +53,5 @@ class DigitalCardContactlessAdapter(
     override fun getItemCount(): Int {
         return digitalCards.size
     }
+
 }
