@@ -1,16 +1,14 @@
-package com.org.marton.studio.project.eldarwallet.ui.activities.qrpay
+package com.org.marton.studio.project.eldarwallet.ui.fragments.contactlesspay
 
-import android.graphics.Bitmap
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.org.marton.studio.project.eldarwallet.domain.usecase.GenerateQrCodeUseCase
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDataUseCase
 import com.org.marton.studio.project.eldarwallet.domain.usecase.GetUserDigitalCardsUseCase
+import com.org.marton.studio.project.eldarwallet.ui.models.DigitalCard
 import com.org.marton.studio.project.eldarwallet.ui.models.UserData
 import com.org.marton.studio.project.eldarwallet.utils.SessionData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,24 +18,19 @@ import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.P)
 @HiltViewModel
-class QrPayViewModel @Inject constructor(
+class ContactlessPayViewModel @Inject constructor(
     private val getUserDataUseCase: GetUserDataUseCase,
-    private val getUserDigitalCardsUseCase: GetUserDigitalCardsUseCase,
-    private val generateQrCodeUseCase: GenerateQrCodeUseCase
+    private val getUserDigitalCardsUseCase: GetUserDigitalCardsUseCase
 ) : ViewModel() {
 
     private val _userData = MutableLiveData<UserData>()
     val userData: LiveData<UserData> = _userData
 
-    private val _qrCodeBitmap = MutableLiveData<Bitmap?>()
-    val qrCodeBitmap: LiveData<Bitmap?> = _qrCodeBitmap
-    private val _errorQr = MutableLiveData("")
-    val errorQr: LiveData<String> = _errorQr
-    private val _isQeGenerated= MutableLiveData(false)
-    val isQeGenerated: LiveData<Boolean> = _isQeGenerated
+    private val _selectedCard = MutableLiveData<DigitalCard>()
+    val selectedCard: LiveData<DigitalCard> = _selectedCard
 
     init {
-        getUserData(SessionData.get().toString())
+        getUserData(SessionData.userId.value.toString())
     }
 
     @RequiresApi(Build.VERSION_CODES.P)
@@ -65,19 +58,7 @@ class QrPayViewModel @Inject constructor(
         }
     }
 
-    fun generateQrCode(data: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            generateQrCodeUseCase(data).onSuccess { bitmap ->
-                _qrCodeBitmap.postValue(bitmap)
-                _errorQr.postValue("")
-                _isQeGenerated.postValue(true)
-            }.onFailure {
-                _qrCodeBitmap.postValue(null)
-                _isQeGenerated.postValue(false)
-                _errorQr.postValue("Error generating QR code")
-            }
-        }
+    fun setSelectedCard(card: DigitalCard) {
+        _selectedCard.value = card
     }
-
-     fun getUserName() = userData.value?.userName + " " + userData.value?.userLastname
 }
